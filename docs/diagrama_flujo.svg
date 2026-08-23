@@ -1,0 +1,350 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1050" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#28a745"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0d6efd"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fd7e14"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc3545"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6f42c1"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0d6efd;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0a58ca;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="layerPres" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="layerServ" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="layerBack" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1400" height="1050" fill="#f8f9fa" rx="8"/>
+
+  <!-- Título -->
+  <rect x="0" y="0" width="1400" height="50" fill="url(#headerGrad)" rx="8"/>
+  <rect x="0" y="25" width="1400" height="25" fill="url(#headerGrad)"/>
+  <text x="700" y="32" text-anchor="middle" fill="white" font-size="20" font-weight="bold">DIAMANTA — Diagrama de Flujo de Información del Sistema</text>
+
+  <!-- ============================================================ -->
+  <!-- CAPAS / LAYERS                                               -->
+  <!-- ============================================================ -->
+
+  <!-- Capa 1: Presentación (Frontend) -->
+  <rect x="20" y="60" width="1360" height="300" fill="url(#layerPres)" stroke="#90caf9" stroke-width="2" rx="6" opacity="0.4"/>
+  <text x="40" y="82" fill="#1565c0" font-size="13" font-weight="bold">CAPA 1: PRESENTACIÓN (React Frontend)</text>
+
+  <!-- Componentes UI -->
+  <rect x="40" y="95" width="180" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="130" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Dashboard</text>
+  <text x="130" y="136" text-anchor="middle" fill="#555" font-size="9">Métricas en vivo</text>
+
+  <rect x="240" y="95" width="180" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="330" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Asignar</text>
+  <text x="330" y="136" text-anchor="middle" fill="#555" font-size="9">Escaneo + Asignación</text>
+
+  <rect x="440" y="95" width="180" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="530" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Control Calidad</text>
+  <text x="530" y="136" text-anchor="middle" fill="#555" font-size="9">Aprobar / Rechazar</text>
+
+  <rect x="640" y="95" width="180" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="730" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Importar Excel</text>
+  <text x="730" y="136" text-anchor="middle" fill="#555" font-size="9">Carga masiva</text>
+
+  <rect x="840" y="95" width="180" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="930" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Prendas / Listado</text>
+  <text x="930" y="136" text-anchor="middle" fill="#555" font-size="9">Filtrar + Paginar</text>
+
+  <rect x="1040" y="95" width="160" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1120" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Búsqueda Global</text>
+  <text x="1120" y="136" text-anchor="middle" fill="#555" font-size="9">Texto completo</text>
+
+  <rect x="1220" y="95" width="140" height="55" fill="white" stroke="#0d6efd" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1290" y="118" text-anchor="middle" fill="#0d6efd" font-size="11" font-weight="bold">Reportes</text>
+  <text x="1290" y="136" text-anchor="middle" fill="#555" font-size="9">Excel / PDF</text>
+
+  <!-- Gestión / Admin -->
+  <rect x="40" y="165" width="150" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="115" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Operarias</text>
+  <text x="115" y="200" text-anchor="middle" fill="#555" font-size="8">CRUD</text>
+
+  <rect x="205" y="165" width="150" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="280" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Usuarios</text>
+  <text x="280" y="200" text-anchor="middle" fill="#555" font-size="8">Admin / Supervisor</text>
+
+  <rect x="370" y="165" width="150" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="445" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Áreas</text>
+  <text x="445" y="200" text-anchor="middle" fill="#555" font-size="8">CRUD</text>
+
+  <rect x="535" y="165" width="150" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="610" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Estados</text>
+  <text x="610" y="200" text-anchor="middle" fill="#555" font-size="8">Catálogo</text>
+
+  <rect x="700" y="165" width="150" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="775" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Motivos Devolución</text>
+  <text x="775" y="200" text-anchor="middle" fill="#555" font-size="8">Catálogo</text>
+
+  <rect x="865" y="165" width="150" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="940" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Auditoría</text>
+  <text x="940" y="200" text-anchor="middle" fill="#555" font-size="8">Bitácora</text>
+
+  <rect x="1030" y="165" width="170" height="45" fill="white" stroke="#6f42c1" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1115" y="186" text-anchor="middle" fill="#6f42c1" font-size="10" font-weight="bold">Traceabilidad</text>
+  <text x="1115" y="200" text-anchor="middle" fill="#555" font-size="8">Línea de tiempo</text>
+
+  <!-- Insumos externos -->
+  <rect x="40" y="230" width="350" height="55" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="215" y="250" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">📄 Archivos Excel (.xlsx / .xls)</text>
+  <text x="215" y="268" text-anchor="middle" fill="#555" font-size="9">Importación de prendas vía SheetJS</text>
+
+  <rect x="420" y="230" width="200" height="55" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="520" y="250" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">📷 Escáner de Código de Barras</text>
+  <text x="520" y="268" text-anchor="middle" fill="#555" font-size="9">USB / Hook useBarcodeScanner</text>
+
+  <rect x="650" y="230" width="200" height="55" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="750" y="250" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">🔐 Autenticación</text>
+  <text x="750" y="268" text-anchor="middle" fill="#555" font-size="9">Login / AuthContext</text>
+
+  <!-- Línea divisoria entre capas -->
+  <line x1="20" y1="372" x2="1380" y2="372" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="8,4"/>
+
+  <!-- Capa 2: Servicios -->
+  <rect x="20" y="375" width="1360" height="170" fill="url(#layerServ)" stroke="#ffcc80" stroke-width="2" rx="6" opacity="0.4"/>
+  <text x="40" y="397" fill="#e65100" font-size="13" font-weight="bold">CAPA 2: SERVICIOS (API Calls — Supabase Client)</text>
+
+  <!-- Servicios -->
+  <rect x="40" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="105" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">garmentsService</text>
+  <text x="105" y="446" text-anchor="middle" fill="#555" font-size="8">CRUD + Dashboard</text>
+
+  <rect x="190" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="255" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">movementsService</text>
+  <text x="255" y="446" text-anchor="middle" fill="#555" font-size="8">Movimientos</text>
+
+  <rect x="340" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="405" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">auditService</text>
+  <text x="405" y="446" text-anchor="middle" fill="#555" font-size="8">Auditoría</text>
+
+  <rect x="490" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="555" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">reportsService</text>
+  <text x="555" y="446" text-anchor="middle" fill="#555" font-size="8">Reportes</text>
+
+  <rect x="640" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="705" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">areasService</text>
+  <text x="705" y="446" text-anchor="middle" fill="#555" font-size="8">Áreas</text>
+
+  <rect x="790" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="855" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">operariasService</text>
+  <text x="855" y="446" text-anchor="middle" fill="#555" font-size="8">Operarias</text>
+
+  <rect x="940" y="410" width="140" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1010" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">returnReasonsService</text>
+  <text x="1010" y="446" text-anchor="middle" fill="#555" font-size="8">Motivos Devolución</text>
+
+  <rect x="1100" y="410" width="130" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1165" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">statusesService</text>
+  <text x="1165" y="446" text-anchor="middle" fill="#555" font-size="8">Estados</text>
+
+  <rect x="1250" y="410" width="110" height="45" fill="white" stroke="#fd7e14" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1305" y="432" text-anchor="middle" fill="#fd7e14" font-size="10" font-weight="bold">supabase.js</text>
+  <text x="1305" y="446" text-anchor="middle" fill="#555" font-size="8">Cliente</text>
+
+  <!-- Tipos de consulta -->
+  <rect x="40" y="470" width="450" height="60" fill="white" stroke="#fd7e14" stroke-width="1" rx="6" filter="url(#shadow)" stroke-dasharray="4,2"/>
+  <text x="265" y="490" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">Tipos de Consulta a Supabase</text>
+  <text x="265" y="508" text-anchor="middle" fill="#555" font-size="9">.from('tabla').select() | .rpc('funcion', {params}) | .insert() | .update() | .delete()</text>
+  <text x="265" y="522" text-anchor="middle" fill="#555" font-size="9">Joins: operarias ( id, full_name, areas ( name ) )</text>
+
+  <rect x="520" y="470" width="350" height="60" fill="white" stroke="#fd7e14" stroke-width="1" rx="6" filter="url(#shadow)" stroke-dasharray="4,2"/>
+  <text x="695" y="490" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">Suscripciones en Tiempo Real</text>
+  <text x="695" y="508" text-anchor="middle" fill="#555" font-size="9">supabase.channel().on('postgres_changes',</text>
+  <text x="695" y="522" text-anchor="middle" fill="#555" font-size="9">{ event: '*', schema: 'public', table: 'garments' }, callback)</text>
+
+  <rect x="900" y="470" width="200" height="60" fill="white" stroke="#fd7e14" stroke-width="1" rx="6" filter="url(#shadow)" stroke-dasharray="4,2"/>
+  <text x="1000" y="490" text-anchor="middle" fill="#e65100" font-size="10" font-weight="bold">RPCs del Sistema</text>
+  <text x="1000" y="508" text-anchor="middle" fill="#555" font-size="9">search_garments(p_search)</text>
+  <text x="1000" y="522" text-anchor="middle" fill="#555" font-size="9">get_dashboard_metrics()</text>
+
+  <!-- Línea divisoria -->
+  <line x1="20" y1="557" x2="1380" y2="557" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="8,4"/>
+
+  <!-- Capa 3: Backend -->
+  <rect x="20" y="560" width="1360" height="200" fill="url(#layerBack)" stroke="#a5d6a7" stroke-width="2" rx="6" opacity="0.4"/>
+  <text x="40" y="582" fill="#2e7d32" font-size="13" font-weight="bold">CAPA 3: BACKEND (Supabase / PostgreSQL)</text>
+
+  <!-- Supabase Blocks -->
+  <rect x="40" y="595" width="200" height="70" fill="white" stroke="#28a745" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="140" y="618" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">Supabase Auth</text>
+  <text x="140" y="636" text-anchor="middle" fill="#555" font-size="9">Autenticación</text>
+  <text x="140" y="652" text-anchor="middle" fill="#555" font-size="9">Email / Password</text>
+
+  <rect x="270" y="595" width="200" height="70" fill="white" stroke="#28a745" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="370" y="618" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">PostgreSQL</text>
+  <text x="370" y="636" text-anchor="middle" fill="#555" font-size="9">Base de Datos</text>
+  <text x="370" y="652" text-anchor="middle" fill="#555" font-size="9">RLS + Triggers</text>
+
+  <rect x="500" y="595" width="200" height="70" fill="white" stroke="#28a745" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="600" y="618" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">RPC Functions</text>
+  <text x="600" y="636" text-anchor="middle" fill="#555" font-size="9">search_garments</text>
+  <text x="600" y="652" text-anchor="middle" fill="#555" font-size="9">get_dashboard_metrics</text>
+
+  <rect x="730" y="595" width="200" height="70" fill="white" stroke="#28a745" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="830" y="618" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">Realtime</text>
+  <text x="830" y="636" text-anchor="middle" fill="#555" font-size="9">postgres_changes</text>
+  <text x="830" y="652" text-anchor="middle" fill="#555" font-size="9">Garments + Movements</text>
+
+  <rect x="960" y="595" width="200" height="70" fill="white" stroke="#28a745" stroke-width="1.5" rx="8" filter="url(#shadow)"/>
+  <text x="1060" y="618" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">Row Level Security</text>
+  <text x="1060" y="636" text-anchor="middle" fill="#555" font-size="9">admin = full access</text>
+  <text x="1060" y="652" text-anchor="middle" fill="#555" font-size="9">supervisor = read/update</text>
+
+  <!-- Tablas -->
+  <rect x="40" y="680" width="630" height="65" fill="white" stroke="#28a745" stroke-width="1" rx="6" filter="url(#shadow)" stroke-dasharray="4,2"/>
+  <text x="355" y="698" text-anchor="middle" fill="#2e7d32" font-size="10" font-weight="bold">Tablas del Sistema</text>
+  <text x="355" y="714" text-anchor="middle" fill="#555" font-size="9">garments | movements | operarias | areas | profiles | return_reasons | garment_statuses | production_centers | pc_operarias | audit_log</text>
+  <text x="355" y="730" text-anchor="middle" fill="#555" font-size="9">Relaciones: areas 1→N operarias 1→N garments 1→N movements; return_reasons 1→N movements</text>
+
+  <rect x="700" y="680" width="380" height="65" fill="white" stroke="#28a745" stroke-width="1" rx="6" filter="url(#shadow)" stroke-dasharray="4,2"/>
+  <text x="890" y="698" text-anchor="middle" fill="#2e7d32" font-size="10" font-weight="bold">Disparadores (Triggers) en BD</text>
+  <text x="890" y="714" text-anchor="middle" fill="#555" font-size="9">auto_audit_on_movement → registra en audit_log</text>
+  <text x="890" y="730" text-anchor="middle" fill="#555" font-size="9">sync_garment_location → sincroniza ubicación</text>
+
+  <!-- Línea divisoria -->
+  <line x1="20" y1="772" x2="1380" y2="772" stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="8,4"/>
+
+  <!-- ============================================================ -->
+  <!-- FLUJOS DE DATOS (Flechas)                                    -->
+  <!-- ============================================================ -->
+
+  <!-- FLUJO 1: Autenticación (Login -> AuthContext -> Supabase Auth -> profiles) -->
+  <path d="M 750,285 L 750,370 L 750,410" stroke="#0d6efd" stroke-width="2" fill="none" marker-end="url(#arrow-blue)"/>
+  <text x="760" y="340" fill="#0d6efd" font-size="9" transform="rotate(90,760,340)">Autenticación (signIn)</text>
+
+  <path d="M 1060,640 L 1060,680" stroke="#0d6efd" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)" stroke-dasharray="5,3"/>
+  <text x="1070" y="665" fill="#0d6efd" font-size="8">RLS Profiles</text>
+
+  <!-- FLUJO 2: Componentes -> Servicios -->
+  <path d="M 130,150 L 130,370 L 105,410" stroke="#fd7e14" stroke-width="1.8" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 330,150 L 330,370 L 255,410" stroke="#fd7e14" stroke-width="1.8" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 530,150 L 530,370 L 405,410" stroke="#fd7e14" stroke-width="1.8" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 730,150 L 730,370 L 555,410" stroke="#fd7e14" stroke-width="1.8" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 930,150 L 930,370 L 855,410" stroke="#fd7e14" stroke-width="1.8" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 1120,150 L 1120,370 L 1005,410" stroke="#fd7e14" stroke-width="1.8" fill="none" marker-end="url(#arrow-orange)"/>
+
+  <!-- FLUJO 3: Servicios -> Supabase -->
+  <path d="M 170,455 L 170,557 L 140,595" stroke="#28a745" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 320,455 L 320,557 L 370,595" stroke="#28a745" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 470,455 L 470,557 L 600,595" stroke="#28a745" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 620,455 L 620,557 L 830,595" stroke="#28a745" stroke-width="1.8" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- Flecha respuesta (Supabase -> Servicios -> Componentes) -->
+  <path d="M 140,665 L 140,557 L 170,455" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)" stroke-dasharray="5,3"/>
+  <path d="M 370,665 L 370,557 L 320,455" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)" stroke-dasharray="5,3"/>
+  <path d="M 600,665 L 600,557 L 470,455" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)" stroke-dasharray="5,3"/>
+
+  <!-- FLUJO 4: Realtime (BD -> Dashboard) -->
+  <path d="M 830,665 L 960,470 L 830,290 L 130,150" stroke="#dc3545" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)" stroke-dasharray="6,3"/>
+  <text x="920" y="380" fill="#dc3545" font-size="9" transform="rotate(-60,920,380)">Realtime: cambios en garments/movements</text>
+
+  <!-- FLUJO 5: Excel Import -->
+  <path d="M 215,285 L 215,370 L 555,410" stroke="#fd7e14" stroke-width="2" fill="none" marker-end="url(#arrow-orange)"/>
+  <text x="350" y="355" fill="#e65100" font-size="9">Importar Excel → garmentsService.insert()</text>
+  <path d="M 555,455 L 555,557 L 370,665" stroke="#28a745" stroke-width="2" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- FLUJO 6: Escáner de barras -->
+  <path d="M 520,285 L 520,370 L 405,410" stroke="#fd7e14" stroke-width="1.5" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 405,455 L 405,557 L 370,595" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- FLUJO 7: Exportar Reportes -->
+  <path d="M 1290,150 L 1450,150 L 1450,250 L 1100,250 L 1100,290 L 1050,370 L 1000,410" stroke="#6f42c1" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)" stroke-dasharray="5,3"/>
+  <text x="1350" y="230" fill="#6f42c1" font-size="9">Exportar Excel/PDF</text>
+
+  <!-- FLUJO 8: Búsqueda Global -->
+  <path d="M 1120,150 L 1180,370 L 1120,410" stroke="#fd7e14" stroke-width="1.5" fill="none" marker-end="url(#arrow-orange)"/>
+  <path d="M 1165,455 L 1165,557 L 600,595" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- ============================================================ -->
+  <!-- LEYENDA / ANOTACIONES                                        -->
+  <!-- ============================================================ -->
+
+  <rect x="20" y="790" width="1360" height="240" fill="white" stroke="#dee2e6" stroke-width="1" rx="8"/>
+  <text x="700" y="815" text-anchor="middle" fill="#333" font-size="14" font-weight="bold">FLUJO DE TRABAJO — Ciclo de Vida de una Prenda</text>
+
+  <!-- Estados -->
+  <rect x="40" y="835" width="140" height="40" fill="#fff3cd" stroke="#ffc107" rx="20"/>
+  <text x="110" y="860" text-anchor="middle" fill="#856404" font-size="11" font-weight="bold">Pendiente</text>
+
+  <path d="M 180,855 L 210,855" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="215" y="835" width="140" height="40" fill="#cce5ff" stroke="#0d6efd" rx="20"/>
+  <text x="285" y="860" text-anchor="middle" fill="#004085" font-size="11" font-weight="bold">En Producción</text>
+
+  <path d="M 355,855 L 385,855" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="390" y="835" width="140" height="40" fill="#e2e3f5" stroke="#6f42c1" rx="20"/>
+  <text x="460" y="860" text-anchor="middle" fill="#383d41" font-size="11" font-weight="bold">Control Calidad</text>
+
+  <path d="M 530,855 L 560,855" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="565" y="830" width="130" height="50" fill="#d4edda" stroke="#28a745" rx="20"/>
+  <text x="630" y="850" text-anchor="middle" fill="#155724" font-size="10" font-weight="bold">Almacén</text>
+  <text x="630" y="865" text-anchor="middle" fill="#155724" font-size="9">(Aprobada)</text>
+
+  <rect x="710" y="830" width="130" height="50" fill="#d4edda" stroke="#28a745" rx="20"/>
+  <text x="775" y="850" text-anchor="middle" fill="#155724" font-size="10" font-weight="bold">Despachada</text>
+  <text x="775" y="865" text-anchor="middle" fill="#155724" font-size="9">(Aprobada)</text>
+
+  <path d="M 560,870 L 560,880 L 630,880" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+  <path d="M 560,870 L 560,880 L 775,880" stroke="#28a745" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+
+  <rect x="860" y="835" width="140" height="40" fill="#f8d7da" stroke="#dc3545" rx="20"/>
+  <text x="930" y="860" text-anchor="middle" fill="#721c24" font-size="11" font-weight="bold">Devuelta</text>
+
+  <path d="M 460,875 L 460,885 L 930,885" stroke="#dc3545" stroke-width="1.5" fill="none" marker-end="url(#arrow-red)"/>
+
+  <!-- Detalle de acciones -->
+  <text x="40" y="910" fill="#333" font-size="11" font-weight="bold">Acciones del sistema:</text>
+
+  <rect x="40" y="920" width="190" height="30" fill="#f0f0f0" stroke="#ccc" rx="5"/>
+  <text x="135" y="940" text-anchor="middle" fill="#333" font-size="9">Asignación a Operaria</text>
+
+  <rect x="250" y="920" width="190" height="30" fill="#f0f0f0" stroke="#ccc" rx="5"/>
+  <text x="345" y="940" text-anchor="middle" fill="#333" font-size="9">Control de Calidad</text>
+
+  <rect x="460" y="920" width="190" height="30" fill="#f0f0f0" stroke="#ccc" rx="5"/>
+  <text x="555" y="940" text-anchor="middle" fill="#333" font-size="9">Devolver a Centro</text>
+
+  <rect x="670" y="920" width="190" height="30" fill="#f0f0f0" stroke="#ccc" rx="5"/>
+  <text x="765" y="940" text-anchor="middle" fill="#333" font-size="9">Agregar Observación</text>
+
+  <rect x="880" y="920" width="190" height="30" fill="#f0f0f0" stroke="#ccc" rx="5"/>
+  <text x="975" y="940" text-anchor="middle" fill="#333" font-size="9">Importación desde Excel</text>
+
+  <text x="40" y="975" fill="#555" font-size="10">
+    <tspan x="40" dy="0">🔹 Cada cambio de estado genera un registro en movements y una entrada en audit_log (vía trigger de BD)</tspan>
+    <tspan x="40" dy="18">🔹 El Dashboard se actualiza en tiempo real vía Realtime subscriptions de Supabase</tspan>
+    <tspan x="40" dy="18">🔹 La seguridad se maneja con Row Level Security (RLS) en cada tabla + roles admin/supervisor</tspan>
+    <tspan x="40" dy="18">🔹 Las prendas Despachadas NO pueden ser modificadas (trigger prevent_despachada_change)</tspan>
+  </text>
+</svg>

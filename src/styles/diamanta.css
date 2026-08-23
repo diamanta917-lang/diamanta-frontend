@@ -1,0 +1,693 @@
+/* ============================================================
+   DIAMANTA - Sistema de Trazabilidad y Control de Flujo
+   Estilos Globales
+   ============================================================ */
+
+:root {
+  --diamanta-primary: #1e3a5f;
+  --diamanta-primary-light: #2563eb;
+  --diamanta-accent: #0ea5e9;
+  --diamanta-success: #198754;
+  --diamanta-danger: #dc3545;
+  --diamanta-warning: #ffc107;
+  --diamanta-info: #0dcaf0;
+  --diamanta-bg: #f0f2f5;
+  --diamanta-card-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --diamanta-card-shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --diamanta-sidebar-width: 250px;
+  --diamanta-nav-link-hover: rgba(255,255,255,0.1);
+  --diamanta-border-radius: 12px;
+  --diamanta-transition: all 0.2s ease;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+
+html { font-size: 15px; }
+
+body {
+  background-color: var(--diamanta-bg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  border: none;
+  border-radius: var(--diamanta-border-radius);
+  box-shadow: var(--diamanta-card-shadow);
+  transition: var(--diamanta-transition);
+}
+
+.card:hover {
+  box-shadow: var(--diamanta-card-shadow-hover);
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 1rem 1.25rem;
+  border-radius: var(--diamanta-border-radius) var(--diamanta-border-radius) 0 0 !important;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+.table {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.table thead th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  border-bottom: 2px solid #e9ecef;
+  padding: 0.75rem 1rem;
+}
+
+.table tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+}
+
+.table-hover tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(37, 99, 235, 0.03);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: var(--diamanta-transition);
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: var(--diamanta-primary-light);
+  border-color: var(--diamanta-primary-light);
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+}
+
+.btn-success:hover, .btn-danger:hover, .btn-warning:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  transition: var(--diamanta-transition);
+  font-size: 0.9rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--diamanta-primary-light);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+  color: #374151;
+}
+
+.input-group-text {
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+.alert {
+  border-radius: var(--diamanta-border-radius);
+  border: none;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  overflow: hidden;
+  z-index: 1050;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.diamanta-app {
+  min-height: 100vh;
+}
+
+.diamanta-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  animation: fadeIn 0.2s ease;
+}
+
+.sidebar .nav-link {
+  transition: var(--diamanta-transition);
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.sidebar .nav-link.hover-bg:hover {
+  background-color: var(--diamanta-nav-link-hover);
+}
+
+.sidebar .nav-link i {
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ============================================================
+   TIMELINE VERTICAL (Trazabilidad)
+   ============================================================ */
+.timeline-vertical {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -30px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  z-index: 1;
+  flex-shrink: 0;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.timeline-line {
+  width: 2px;
+  flex-grow: 1;
+  min-height: 20px;
+  background: #e2e8f0;
+  margin: 4px 0;
+}
+
+.timeline-content {
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+.login-page-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e40af 100%);
+  padding: 20px;
+}
+
+.login-card {
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+  min-height: 550px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.login-brand-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+  padding: 3rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-brand-panel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.brand-gem-shape {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 30px;
+  transform: rotate(45deg);
+}
+
+.brand-gem-shape-small {
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  transform: rotate(45deg);
+}
+
+.brand-logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo-icon {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.brand-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 1rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.brand-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-top: auto;
+}
+
+.login-form-panel {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+}
+
+.login-form-header {
+  margin-bottom: 2rem;
+}
+
+.login-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.form-group-custom {
+  margin-bottom: 1.5rem;
+}
+
+.form-label-custom {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.input-wrapper-custom {
+  position: relative;
+}
+
+.form-input-custom {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  background: #f8fafc;
+}
+
+.form-input-custom:focus {
+  border-color: #2563eb;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.input-icon-custom {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.btn-submit-custom {
+  width: 100%;
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-submit-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
+}
+
+.btn-submit-custom:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-form-panel .form-control {
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #f8fafc;
+  transition: all 0.2s;
+}
+
+.login-form-panel .form-control:focus {
+  border-color: #2563eb;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* ============================================================
+   SWEETALERT2 CUSTOM
+   ============================================================ */
+.diamanta-swal-popup {
+  border-radius: 16px !important;
+  padding: 1.5rem !important;
+}
+
+.swal2-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.swal2-confirm {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0.6rem 1.5rem !important;
+}
+
+/* ============================================================
+   SEARCH AUTOCOMPLETE
+   ============================================================ */
+.search-autocomplete-wrapper .dropdown-menu {
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.search-autocomplete-wrapper .dropdown-item {
+  padding: 0.6rem 1rem;
+  transition: background 0.15s;
+}
+
+.search-autocomplete-wrapper .dropdown-item.active {
+  background-color: #2563eb;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ===== Mobile sidebar: drawer overlay ===== */
+@media (max-width: 991.98px) {
+  .diamanta-app .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px !important;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .diamanta-app .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .diamanta-app .sidebar.collapsed {
+    width: 250px !important;
+  }
+
+  .diamanta-app .sidebar.collapsed .nav-link span,
+  .diamanta-app .sidebar.collapsed .nav-link small,
+  .diamanta-app .sidebar.collapsed h5 span,
+  .diamanta-app .sidebar.collapsed h5 i {
+    display: inline !important;
+  }
+
+  .diamanta-app .sidebar.collapsed .nav-link {
+    justify-content: flex-start !important;
+    padding: 0 1rem !important;
+  }
+
+  .diamanta-app .sidebar.collapsed .nav-link.justify-content-center {
+    justify-content: flex-start !important;
+  }
+
+  .diamanta-app > div:last-child {
+    width: 100% !important;
+  }
+}
+
+/* ===== Login responsive ===== */
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+    border-radius: 16px;
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .login-brand-panel {
+    padding: 2rem;
+    min-height: 200px;
+    flex: 0 0 auto;
+  }
+
+  .login-form-panel {
+    padding: 2rem;
+  }
+
+  .brand-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===== Small mobile tweaks ===== */
+@media (max-width: 575.98px) {
+  html {
+    font-size: 14px;
+  }
+
+  .login-brand-panel {
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+
+  .login-form-panel {
+    padding: 1.5rem;
+  }
+
+  .brand-logo-text {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .swal2-popup {
+    padding: 1rem !important;
+  }
+
+  .swal2-title {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* ===== Tablets & small laptops: tighter content ===== */
+@media (max-width: 991.98px) {
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-header {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* ===== Tables: make sure they scroll horizontally on small screens ===== */
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== Stack PageHeader on small screens ===== */
+@media (max-width: 767.98px) {
+  .diamanta-page-header,
+  .diamanta-page-header > div:first-child {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+
+  .diamanta-page-header .btn {
+    width: 100%;
+  }
+
+  /* Any inline page-level header using d-flex justify-content-between */
+  .diamanta-app .d-flex.justify-content-between.align-items-center.mb-4 > div:last-child .btn,
+  .diamanta-app .d-flex.justify-content-between.align-items-center > div:last-child .btn {
+    width: 100%;
+  }
+
+  .diamanta-app .d-md-flex.justify-content-between > div {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.cursor-pointer { cursor: pointer; }
+
+.fs-7 { font-size: 0.85rem; }
+
+.border-dashed { border-style: dashed !important; }
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Chart containers */
+canvas {
+  max-width: 100%;
+}
+
+/* Stats card hover */
+.card.border-start-4:hover {
+  transform: translateY(-2px);
+}
