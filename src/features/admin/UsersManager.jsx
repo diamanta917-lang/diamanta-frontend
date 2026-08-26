@@ -206,8 +206,7 @@ export const UsersManager = () => {
         </div>
         <div class="mb-3">
           <label class="form-label fw-bold">Correo Electrónico</label>
-          <input id="swal-email" type="email" class="form-control" value="${user.email || ''}" disabled>
-          <small class="text-muted">El correo no se puede cambiar</small>
+          <input id="swal-email" type="email" class="form-control" value="${user.email || ''}">
         </div>
         <div class="mb-3">
           <label class="form-label fw-bold">Rol</label>
@@ -247,20 +246,38 @@ export const UsersManager = () => {
       },
       preConfirm: () => {
         const name = document.getElementById('swal-name').value.trim();
+        const email = document.getElementById('swal-email').value.trim();
         const role = document.getElementById('swal-role').value;
         const areaId = document.getElementById('swal-area').value || null;
         const isActive = document.getElementById('swal-active').value === 'true';
         if (!name) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
+        if (!email) { Swal.showValidationMessage('El correo es obligatorio'); return false; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Swal.showValidationMessage('El correo no es válido'); return false; }
         if (role === 'supervisor' && !areaId) { Swal.showValidationMessage('Debe seleccionar un área para la supervisora'); return false; }
-        return { full_name: name, role, area_id: role === 'supervisor' ? areaId : null, is_active: isActive };
+        return { full_name: name, email, role, area_id: role === 'supervisor' ? areaId : null, is_active: isActive };
       }
     });
 
     if (formValues) {
       try {
+        if (formValues.email && formValues.email !== user.email) {
+          const { error: emailError } = await supabase.rpc('change_user_email', {
+            p_user_id: user.id,
+            p_new_email: formValues.email
+          });
+          if (emailError) {
+            if (String(emailError.message || '').includes('Could not find the function')) {
+              showError('La función change_user_email no existe en la base de datos. Ejecute el archivo database/migration_v15_edit_email.sql en el SQL Editor de Supabase.');
+              return;
+            }
+            throw emailError;
+          }
+        }
+
+        const { full_name, email, role, area_id, is_active } = formValues;
         const { error } = await supabase
           .from('profiles')
-          .update(formValues)
+          .update({ full_name, email, role, area_id, is_active })
           .eq('id', user.id);
 
         if (error) throw error;
@@ -270,7 +287,7 @@ export const UsersManager = () => {
           userEmail: profile?.email,
           action: 'Editar usuario',
           module: 'Usuarios',
-          details: { id: user.id, email: user.email, ...formValues }
+          details: { id: user.id, email, full_name, role, area_id, is_active }
         });
         refreshUsers();
       } catch (err) {
