@@ -51,11 +51,44 @@ export default function Dashboard() {
   }, [fetchData]);
 
   useEffect(() => {
-    const channel = supabase.channel('dashboard-changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'garments' }, () => fetchData().then(m => { if (m) setMetrics(m); }))
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'movements' }, () => fetchData().then(m => { if (m) setMetrics(m); }))
-      .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    const refresh = () => fetchData().then(m => { if (m) setMetrics(m); });
+    let interval = null;
+
+    const startInterval = () => {
+      if (!interval) {
+        interval = setInterval(() => {
+          if (document.visibilityState === 'visible') refresh();
+        }, 30000);
+      }
+    };
+    const stopInterval = () => {
+      if (interval) { clearInterval(interval); interval = null; }
+    };
+
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') {
+        supabase.auth.refreshSession().catch(() => {});
+        refresh();
+        startInterval();
+      } else {
+        stopInterval();
+      }
+    };
+
+    const onFocus = () => {
+      supabase.auth.refreshSession().catch(() => {});
+      refresh();
+    };
+
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', onFocus);
+    startInterval();
+
+    return () => {
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', onFocus);
+      stopInterval();
+    };
   }, [fetchData]);
 
   if (loading) return <LoadingSpinner text="Cargando dashboard..." />;
