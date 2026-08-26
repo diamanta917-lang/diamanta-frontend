@@ -115,6 +115,8 @@ export const UsersManager = () => {
 
     if (formValues) {
       try {
+        const { data: { session: adminSession } } = await supabase.auth.getSession();
+
         const { data, error } = await supabase.auth.signUp({
           email: formValues.email,
           password: formValues.password,
@@ -129,6 +131,14 @@ export const UsersManager = () => {
         });
 
         if (error) throw error;
+
+        // Evita que signUp inicie sesión con el nuevo usuario: restaurar la sesión del admin
+        if (adminSession) {
+          await supabase.auth.setSession({
+            access_token: adminSession.access_token,
+            refresh_token: adminSession.refresh_token,
+          });
+        }
 
         const newUserId = data?.user?.id || data?.session?.user?.id;
         const identities = data?.identities || [];
