@@ -12,6 +12,18 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { isSupervisor, isSupervisorPrincipal, isAdmin } = useAuth();
 
+  const statusByMetric = {
+    pendientes: 'Pendiente de revisión',
+    asignadas: 'Asignada',
+    en_produccion: 'En Produccion',
+    recibidas_calidad: 'Recibido por control de calidad',
+    aprobadas: 'Aprobada',
+    requiere_correccion: 'Requiere corrección',
+    terminadas: 'Terminado',
+  };
+
+  const goToStatus = (status) => navigate(`/prendas?status=${encodeURIComponent(status)}`);
+
   const fetchData = useCallback(async () => {
     try {
       const data = await garmentsService.getDashboardMetrics();
@@ -146,25 +158,25 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <div className="row g-3 mb-4">
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="Pendientes" value={metrics.pendientes} icon="bi-clock" color="warning" />
+          <StatsCard title="Pendientes" value={metrics.pendientes} icon="bi-clock" color="warning" onClick={() => goToStatus(statusByMetric.pendientes)} />
         </div>
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="Asignadas" value={metrics.asignadas} icon="bi-person-check" color="info" />
+          <StatsCard title="Asignadas" value={metrics.asignadas} icon="bi-person-check" color="info" onClick={() => goToStatus(statusByMetric.asignadas)} />
         </div>
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="En Producción" value={metrics.en_produccion} icon="bi-gear" color="primary" />
+          <StatsCard title="En Producción" value={metrics.en_produccion} icon="bi-gear" color="primary" onClick={() => goToStatus(statusByMetric.en_produccion)} />
         </div>
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="En Control de Calidad" value={metrics.recibidas_calidad} icon="bi-clipboard-check" color="info" />
+          <StatsCard title="En Control de Calidad" value={metrics.recibidas_calidad} icon="bi-clipboard-check" color="info" onClick={() => goToStatus(statusByMetric.recibidas_calidad)} />
         </div>
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="Aprobadas" value={metrics.aprobadas} icon="bi-check-circle" color="success" />
+          <StatsCard title="Aprobadas" value={metrics.aprobadas} icon="bi-check-circle" color="success" onClick={() => goToStatus(statusByMetric.aprobadas)} />
         </div>
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="Requiere Corr." value={metrics.requiere_correccion} icon="bi-arrow-return-left" color="danger" />
+          <StatsCard title="Requiere Corr." value={metrics.requiere_correccion} icon="bi-arrow-return-left" color="danger" onClick={() => goToStatus(statusByMetric.requiere_correccion)} />
         </div>
         <div className="col-xl-3 col-lg-4 col-md-6">
-          <StatsCard title="Terminadas" value={metrics.terminadas} icon="bi-patch-check" color="success" />
+          <StatsCard title="Terminadas" value={metrics.terminadas} icon="bi-patch-check" color="success" onClick={() => goToStatus(statusByMetric.terminadas)} />
         </div>
       </div>
 
@@ -183,13 +195,13 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="col-md-6">
-          <div className="card shadow-sm border-warning">
+          <div className="card shadow-sm border-warning" style={{ cursor: 'pointer' }} onClick={() => goToStatus('Pendiente Recepcion')}>
             <div className="card-body text-center py-4">
               <i className="bi bi-inbox text-warning" style={{ fontSize: '2.5rem' }}></i>
               <h5 className="mt-2 fw-bold">{metrics.pendiente_recepcion} Pend. Recepción</h5>
               <p className="text-muted mb-3">Prendas en tránsito entre áreas</p>
               {(isSupervisor || isAdmin) && (
-                <button className="btn btn-outline-warning btn-lg px-4" onClick={() => navigate('/recepcion-area')}>
+                <button className="btn btn-outline-warning btn-lg px-4" onClick={(e) => { e.stopPropagation(); navigate('/recepcion-area'); }}>
                   <i className="bi bi-inbox-fill me-2"></i>Ir a Recepción
                 </button>
               )}

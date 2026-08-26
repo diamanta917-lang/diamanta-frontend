@@ -3,7 +3,7 @@ import { supabase } from '../../services/supabase';
 import { auditService } from '../../services/audit';
 import { locationsService } from '../../services/locations';
 import { useAuth } from '../../context/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PageHeader } from '../../components/UI/PageHeader';
 import { StatusBadge } from '../../components/UI/StatusBadge';
 import { LoadingSpinner } from '../../components/UI/LoadingSpinner';
@@ -27,7 +27,8 @@ const KNOWN_LOCATIONS = ['Almacén', 'Operario', 'Supervisor'];
 export const GarmentsList = () => {
   const [garments, setGarments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const statusFilter = searchParams.get('status') || '';
   const [locationFilter, setLocationFilter] = useState('');
   const [operarias, setOperarias] = useState([]);
   const [customLocations, setCustomLocations] = useState([]);
@@ -39,6 +40,13 @@ export const GarmentsList = () => {
   const searchDebounced = useDebounce(searchQuery, 300);
   const navigate = useNavigate();
   const { user, profile } = useAuth();
+
+  const [prevStatus, setPrevStatus] = useState(statusFilter);
+  if (statusFilter !== prevStatus) {
+    setPrevStatus(statusFilter);
+    setPage(0);
+    setLoading(true);
+  }
 
   const fetchGarments = useCallback(async () => {
     try {
@@ -332,7 +340,12 @@ export const GarmentsList = () => {
               ))}
             </select>
             <select className="form-select" value={statusFilter}
-              onChange={(e) => { setStatusFilter(e.target.value); setPage(0); setLoading(true); }} style={{ width: 'auto' }}>
+              onChange={(e) => {
+                const v = e.target.value;
+                setPage(0);
+                setLoading(true);
+                setSearchParams(v ? { status: v } : {}, { replace: true });
+              }} style={{ width: 'auto' }}>
               <option value="">Todos los estados</option>
               {availableStatuses.map(s => (
                 <option key={s} value={s}>{s}</option>
