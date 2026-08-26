@@ -485,8 +485,8 @@ export const UsersManager = () => {
         .rpc('delete_user', { p_user_id: user.id });
 
       if (error) {
-        if (error.message?.includes('operarias') || error.message?.includes('garments') || error.code === '23503') {
-          showError('No se puede eliminar: el usuario tiene operarias o prendas asociadas. Desactive el usuario en su lugar.');
+        if (error.code === '23503' || error.code === '23505') {
+          showError('No se puede eliminar: el usuario tiene registros asociados en el sistema. Desactive el usuario en su lugar.');
         } else {
           throw error;
         }

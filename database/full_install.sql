@@ -1100,6 +1100,10 @@ BEGIN
     UPDATE area_transitions SET from_supervisor_id    = NULL WHERE from_supervisor_id    = p_user_id;
     UPDATE area_transitions SET to_supervisor_id      = NULL WHERE to_supervisor_id      = p_user_id;
 
+    DELETE FROM auth.identities WHERE user_id = p_user_id;
+
+    DELETE FROM public.profiles WHERE id = p_user_id;
+
     DELETE FROM auth.users WHERE id = p_user_id;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
