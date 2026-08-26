@@ -141,10 +141,11 @@ export const UsersManager = () => {
         }
 
         const newUserId = data?.user?.id || data?.session?.user?.id;
-        const identities = data?.identities || [];
 
-        // Si no se creó un usuario nuevo, el correo ya está registrado
-        if (!newUserId || identities.length === 0) {
+        // Con el email auto-confirmado, un usuario NUEVO siempre devuelve sesión.
+        // Un correo duplicado devuelve identities vacío y SIN sesión.
+        const isDuplicate = !newUserId || !data?.session;
+        if (isDuplicate) {
           showError('Ese correo ya está registrado en el sistema');
           return;
         }
