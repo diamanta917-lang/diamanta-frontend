@@ -37,7 +37,7 @@ export const CargasModule = () => {
   const handleExportSupervisors = async () => {
     if (supervisorLoad.length === 0) return;
     const exportData = supervisorLoad.map(s => ({
-      'Supervisora': s.supervisor_name,
+      'Supervisor': s.supervisor_name,
       'Área': s.area_name,
       'Total': s.total,
       'Pendientes': s.pendientes,
@@ -46,7 +46,7 @@ export const CargasModule = () => {
       'Aprobadas': s.aprobadas,
       'Requiere Corrección': s.requiere_correccion,
     }));
-    await reportsService.exportToExcel(exportData, 'Cargas por Supervisora', 'cargas-supervisoras');
+    await reportsService.exportToExcel(exportData, 'Cargas por Supervisor', 'cargas-supervisoras');
     showToast({ icon: 'success', title: 'Excel generado' });
   };
 
@@ -54,7 +54,7 @@ export const CargasModule = () => {
     if (operariaLoad.length === 0) return;
     const exportData = operariaLoad.map(o => ({
       'Operaria': o.operaria_name,
-      'Supervisora': o.supervisor_name,
+      'Supervisor': o.supervisor_name,
       'Área': o.area_name,
       'Total': o.total,
       'Pendientes': o.pendientes,
@@ -71,16 +71,16 @@ export const CargasModule = () => {
 
   return (
     <div>
-      <PageHeader title="Cargas de Trabajo" subtitle="Prendas asignadas por supervisora y operaria" icon="bi-bar-chart-line" />
+      <PageHeader title="Cargas de Trabajo" subtitle="Prendas asignadas por supervisor y operaria" icon="bi-bar-chart-line" />
 
       <div className="row g-4">
-        {/* Supervisoras */}
+        {/* Supervisores */}
         <div className="col-12">
           <div className="card shadow-sm">
             <div className="card-header bg-white d-flex justify-content-between align-items-center">
               <h6 className="mb-0 fw-bold">
                 <i className="bi bi-person-badge me-2 text-primary"></i>
-                Prendas por Supervisora
+                Prendas por Supervisor
                 <span className="badge bg-primary ms-2">{supervisorLoad.length}</span>
               </h6>
               <button className="btn btn-outline-success btn-sm" onClick={handleExportSupervisors}>
@@ -91,14 +91,14 @@ export const CargasModule = () => {
               {supervisorLoad.length === 0 ? (
                 <div className="text-center py-4 text-muted">
                   <i className="bi bi-inbox fs-1"></i>
-                  <p className="mt-2">No hay supervisoras con prendas asignadas</p>
+                  <p className="mt-2">No hay supervisores con prendas asignadas</p>
                 </div>
               ) : (
                 <div className="table-responsive">
                   <table className="table table-hover table-sm align-middle mb-0">
                     <thead className="table-light">
                       <tr>
-                        <th>Supervisora</th>
+                        <th>Supervisor</th>
                         <th>Área</th>
                         <th className="text-center">Total</th>
                         <th className="text-center">Pendientes</th>
@@ -158,7 +158,7 @@ export const CargasModule = () => {
                     <thead className="table-light sticky-top">
                       <tr>
                         <th>Operaria</th>
-                        <th>Supervisora</th>
+                        <th>Supervisor</th>
                         <th>Área</th>
                         <th className="text-center">Total</th>
                         <th className="text-center">Pendientes</th>

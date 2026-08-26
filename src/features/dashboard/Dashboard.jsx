@@ -112,7 +112,7 @@ export default function Dashboard() {
           >
             <i className="bi bi-bar-chart-line" style={{ fontSize: '2.5rem' }}></i>
             <h5 className="fw-bold mt-2 mb-0">CARGAS</h5>
-            <small className="opacity-75">Prendas por supervisora/operaria</small>
+            <small className="opacity-75">Prendas por supervisor/operaria</small>
           </button>
         </div>
 

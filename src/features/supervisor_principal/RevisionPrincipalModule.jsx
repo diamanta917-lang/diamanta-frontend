@@ -169,7 +169,7 @@ export const RevisionPrincipalModule = () => {
           </div>
           <p class="text-muted mb-0">
             <i class="bi bi-info-circle me-1"></i>
-            La prenda quedará como <strong>pendiente de recepción</strong> en el área seleccionada y su supervisora deberá recepcionarla para reasignarla.
+            La prenda quedará como <strong>pendiente de recepción</strong> en el área seleccionada y su supervisor deberá recepcionarla para reasignarla.
           </p>
         </div>
       `,
@@ -199,7 +199,7 @@ export const RevisionPrincipalModule = () => {
         html: `
           <p class="mb-1"><span class="badge bg-secondary">${currentGarment.barcode}</span></p>
           <p class="mb-0">Enviada a recepción de <strong>${destAreaNombre}</strong></p>
-          <small class="text-muted">La supervisora deberá recepcionarla y reasignarla.</small>
+          <small class="text-muted">El supervisor deberá recepcionarla y reasignarla.</small>
         `,
         timer: 3000,
         showConfirmButton: false,
@@ -231,7 +231,7 @@ export const RevisionPrincipalModule = () => {
     <div>
       <PageHeader
         title="Revisión Final"
-        subtitle="Supervisora Principal — Revise y termine prendas"
+        subtitle="Supervisor Principal — Revise y termine prendas"
         icon="bi-star-check"
         actions={
           <button className="btn btn-outline-secondary btn-sm" onClick={loadData} disabled={refreshing}>

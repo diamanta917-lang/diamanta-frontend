@@ -71,11 +71,11 @@ export const OperariasManager = () => {
           </div>
         </div>
         <div class="mb-3">
-          <label class="form-label fw-bold">Supervisora Asignada</label>
+          <label class="form-label fw-bold">Supervisor Asignado</label>
           <select id="swal-supervisor" class="form-select">
             <option value="">Primero seleccione un área...</option>
           </select>
-          <small class="text-muted">El admin asigna la operaria a una supervisora específica del área</small>
+          <small class="text-muted">El admin asigna la operaria a un supervisor específico del área</small>
         </div>
       `,
       showCancelButton: true,
@@ -94,9 +94,9 @@ export const OperariasManager = () => {
           }
           const areaSupervisors = supervisors.filter(s => s.area_id === areaId);
           if (areaSupervisors.length === 0) {
-            supervisorSelect.innerHTML = '<option value="">No hay supervisoras en esta área</option>';
+            supervisorSelect.innerHTML = '<option value="">No hay supervisores en esta área</option>';
           } else {
-            supervisorSelect.innerHTML = '<option value="">Seleccione una supervisora...</option>' +
+            supervisorSelect.innerHTML = '<option value="">Seleccione un supervisor...</option>' +
               areaSupervisors.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
           }
         };
@@ -139,7 +139,7 @@ export const OperariasManager = () => {
         const supervisorId = document.getElementById('swal-supervisor').value;
         if (!name) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
         if (!areaId) { Swal.showValidationMessage('Debe seleccionar un área'); return false; }
-        if (!supervisorId) { Swal.showValidationMessage('Debe seleccionar una supervisora'); return false; }
+        if (!supervisorId) { Swal.showValidationMessage('Debe seleccionar un supervisor'); return false; }
         return { full_name: name, area_id: areaId, supervisor_id: supervisorId };
       }
     });
@@ -236,10 +236,10 @@ action: 'Eliminar operaria',
           </select>
         </div>
         <div class="mb-3">
-          <label class="form-label fw-bold">Supervisora Asignada</label>
+          <label class="form-label fw-bold">Supervisor Asignado</label>
           <select id="swal-supervisor" class="form-select">
             ${areaSupervisors.length === 0
-              ? '<option value="">No hay supervisoras en esta área</option>'
+              ? '<option value="">No hay supervisores en esta área</option>'
               : areaSupervisors.map(s =>
                   `<option value="${s.id}" ${s.id === operaria.supervisor_id ? 'selected' : ''}>${s.full_name}</option>`
                 ).join('')
@@ -258,7 +258,7 @@ action: 'Eliminar operaria',
           const areaId = areaSelect.value;
           const areaSupervisors = supervisors.filter(s => s.area_id === areaId);
           supervisorSelect.innerHTML = areaSupervisors.length === 0
-            ? '<option value="">No hay supervisoras en esta área</option>'
+            ? '<option value="">No hay supervisores en esta área</option>'
             : areaSupervisors.map(s => `<option value="${s.id}">${s.full_name}</option>`).join('');
         });
       },
@@ -268,7 +268,7 @@ action: 'Eliminar operaria',
         const supervisorId = document.getElementById('swal-supervisor').value;
         if (!name) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
         if (!areaId) { Swal.showValidationMessage('Debe seleccionar un área'); return false; }
-        if (!supervisorId) { Swal.showValidationMessage('Debe seleccionar una supervisora'); return false; }
+        if (!supervisorId) { Swal.showValidationMessage('Debe seleccionar un supervisor'); return false; }
         return { full_name: name, area_id: areaId, supervisor_id: supervisorId };
       }
     });
@@ -296,7 +296,7 @@ action: 'Editar operaria',
   const columns = [
     { label: 'Nombre', key: 'full_name', render: (r) => <span className="fw-bold">{r.full_name}</span> },
     { label: 'Área', key: 'area', render: (r) => r.areas?.name || 'N/A' },
-    { label: 'Supervisora', key: 'supervisor', render: (r) => r.profiles?.full_name || 'Sin asignar' },
+    { label: 'Supervisor', key: 'supervisor', render: (r) => r.profiles?.full_name || 'Sin asignar' },
     { label: 'Estado', key: 'is_active', render: (r) =>
       r.is_active ? <span className="badge bg-success">Activa</span> : <span className="badge bg-danger">Inactiva</span>
     },

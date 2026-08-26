@@ -172,9 +172,9 @@ export const Reports = () => {
         }
         case 'prendas-por-supervisora': {
           data = await supervisorsService.getSupervisorLoad();
-          title = 'Prendas por Supervisora';
+          title = 'Prendas por Supervisor';
           columns = [
-            { label: 'Supervisora', key: 'supervisor_name' },
+            { label: 'Supervisor', key: 'supervisor_name' },
             { label: 'Área', key: 'area_name' },
             { label: 'Total', key: 'total' },
             { label: 'Pendientes', key: 'pendientes' },
@@ -190,7 +190,7 @@ export const Reports = () => {
           title = 'Prendas por Operaria';
           columns = [
             { label: 'Operaria', key: 'operaria_name' },
-            { label: 'Supervisora', key: 'supervisor_name' },
+            { label: 'Supervisor', key: 'supervisor_name' },
             { label: 'Área', key: 'area_name' },
             { label: 'Total', key: 'total' },
             { label: 'Pendientes', key: 'pendientes' },
@@ -263,7 +263,7 @@ export const Reports = () => {
     { id: 'productividad', label: 'Productividad General', icon: 'bi-graph-up-arrow' },
     { id: 'import-summary', label: 'Resumen Importaciones', icon: 'bi-file-earmark-excel' },
     { id: 'prendas-por-ubicacion', label: 'Prendas por Ubicación', icon: 'bi-geo-alt' },
-    { id: 'prendas-por-supervisora', label: 'Prendas por Supervisora', icon: 'bi-person-badge' },
+    { id: 'prendas-por-supervisora', label: 'Prendas por Supervisor', icon: 'bi-person-badge' },
     { id: 'prendas-por-operaria', label: 'Prendas por Operaria', icon: 'bi-people' },
   ];
 

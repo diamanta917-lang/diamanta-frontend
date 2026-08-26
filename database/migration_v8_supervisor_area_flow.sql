@@ -112,7 +112,7 @@ UPDATE movements SET to_status   = 'Terminado' WHERE to_status   = 'Despachada';
 
 UPDATE garment_statuses
 SET name = 'Terminado',
-    description = 'Prenda terminada y aprobada por supervisora principal',
+    description = 'Prenda terminada y aprobada por supervisor principal',
     color = 'success'
 WHERE name = 'Despachada';
 
@@ -124,7 +124,7 @@ DELETE FROM garment_statuses WHERE name = 'Despachada';
 -- ============================================================
 
 INSERT INTO garment_statuses (name, description, color) VALUES
-    ('Aprobada',            'Prenda aprobada por supervisora, lista para pasar a otra área', 'success'),
+    ('Aprobada',            'Prenda aprobada por supervisor, lista para pasar a otra área', 'success'),
     ('Pendiente Recepcion', 'Prenda enviada a otra área, pendiente de recepción',            'info')
 ON CONFLICT (name) DO NOTHING;
 
@@ -276,7 +276,7 @@ BEGIN
     SELECT
         o.id,
         o.full_name,
-        COALESCE(p.full_name, 'Sin supervisora'),
+        COALESCE(p.full_name, 'Sin supervisor'),
         COALESCE(a.name, 'Sin área'),
         COUNT(g.id)::BIGINT,
         COUNT(g.id) FILTER (WHERE g.status = 'Pendiente de revisión')::BIGINT,
@@ -496,7 +496,7 @@ BEGIN
     SELECT role INTO v_role FROM profiles WHERE id = p_supervisor_principal_id;
 
     IF v_role IS NULL OR (v_role <> 'supervisora_principal' AND v_role <> 'admin') THEN
-        RAISE EXCEPTION 'Solo la supervisora principal o el administrador pueden terminar prendas';
+        RAISE EXCEPTION 'Solo el supervisor principal o el administrador pueden terminar prendas';
     END IF;
 
     -- Actualizar prenda

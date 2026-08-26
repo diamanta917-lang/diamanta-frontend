@@ -63,6 +63,6 @@ export const ROLES = {
 
 export const ROLE_NAMES = {
   [ROLES.ADMIN]: 'Administrador',
-  [ROLES.SUPERVISOR]: 'Supervisora',
-  [ROLES.SUPERVISORA_PRINCIPAL]: 'Supervisora Principal',
+  [ROLES.SUPERVISOR]: 'Supervisor',
+  [ROLES.SUPERVISORA_PRINCIPAL]: 'Supervisor Principal',
 };

@@ -90,7 +90,7 @@ export const PasarAreaModule = () => {
     const result = await Swal.fire({
       title: 'Confirmar',
       html: `<p>¿Pasar <strong>${selectedGarments.length}</strong> prenda(s) al área <strong>${destArea?.name}</strong>?</p>
-             <p class="text-muted">La supervisora de esa área deberá recepcionarlas.</p>`,
+             <p class="text-muted">El supervisor de esa área deberá recepcionarlas.</p>`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Sí, pasar',

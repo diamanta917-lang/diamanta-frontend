@@ -15,8 +15,8 @@ export const UsersManager = () => {
 
   const roleLabels = {
     admin: 'Administrador',
-    supervisor: 'Supervisora',
-    supervisora_principal: 'Supervisora Principal',
+    supervisor: 'Supervisor',
+    supervisora_principal: 'Supervisor Principal',
   };
 
   const roleBadges = {
@@ -73,13 +73,13 @@ export const UsersManager = () => {
         <div class="mb-3">
           <label class="form-label fw-bold">Rol</label>
           <select id="swal-role" class="form-select">
-            <option value="supervisor">Supervisora</option>
-            <option value="supervisora_principal">Supervisora Principal</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="supervisora_principal">Supervisor Principal</option>
             <option value="admin">Administrador</option>
           </select>
         </div>
         <div class="mb-3" id="swal-area-wrapper">
-          <label class="form-label fw-bold">Área (solo para supervisoras)</label>
+          <label class="form-label fw-bold">Área (solo para supervisores)</label>
           <select id="swal-area" class="form-select">
             <option value="">Sin área específica</option>
             ${areas.map(a => `<option value="${a.id}">${a.name}</option>`).join('')}
@@ -108,7 +108,7 @@ export const UsersManager = () => {
         if (!email) { Swal.showValidationMessage('El correo es obligatorio'); return false; }
         if (!password || password.length < 6) { Swal.showValidationMessage('La contraseña debe tener al menos 6 caracteres'); return false; }
         if (!name) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
-        if (role === 'supervisor' && !areaId) { Swal.showValidationMessage('Debe seleccionar un área para la supervisora'); return false; }
+        if (role === 'supervisor' && !areaId) { Swal.showValidationMessage('Debe seleccionar un área para el supervisor'); return false; }
         return { email, password, full_name: name, role, area_id: areaId };
       }
     });
@@ -211,13 +211,13 @@ export const UsersManager = () => {
         <div class="mb-3">
           <label class="form-label fw-bold">Rol</label>
           <select id="swal-role" class="form-select">
-            <option value="supervisor" ${user.role === 'supervisor' ? 'selected' : ''}>Supervisora</option>
-            <option value="supervisora_principal" ${user.role === 'supervisora_principal' ? 'selected' : ''}>Supervisora Principal</option>
+            <option value="supervisor" ${user.role === 'supervisor' ? 'selected' : ''}>Supervisor</option>
+            <option value="supervisora_principal" ${user.role === 'supervisora_principal' ? 'selected' : ''}>Supervisor Principal</option>
             <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Administrador</option>
           </select>
         </div>
         <div class="mb-3" id="swal-area-wrapper">
-          <label class="form-label fw-bold">Área (solo para supervisoras)</label>
+          <label class="form-label fw-bold">Área (solo para supervisores)</label>
           <select id="swal-area" class="form-select">
             <option value="">Sin área</option>
             ${areas.map(a => `<option value="${a.id}" ${a.id === user.area_id ? 'selected' : ''}>${a.name}</option>`).join('')}
@@ -253,7 +253,7 @@ export const UsersManager = () => {
         if (!name) { Swal.showValidationMessage('El nombre es obligatorio'); return false; }
         if (!email) { Swal.showValidationMessage('El correo es obligatorio'); return false; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Swal.showValidationMessage('El correo no es válido'); return false; }
-        if (role === 'supervisor' && !areaId) { Swal.showValidationMessage('Debe seleccionar un área para la supervisora'); return false; }
+        if (role === 'supervisor' && !areaId) { Swal.showValidationMessage('Debe seleccionar un área para el supervisor'); return false; }
         return { full_name: name, email, role, area_id: role === 'supervisor' ? areaId : null, is_active: isActive };
       }
     });
@@ -335,8 +335,8 @@ export const UsersManager = () => {
       text: `Rol actual: ${roleLabels[user.role] || user.role}`,
       input: 'select',
       inputOptions: {
-        supervisor: 'Supervisora',
-        supervisora_principal: 'Supervisora Principal',
+        supervisor: 'Supervisor',
+        supervisora_principal: 'Supervisor Principal',
         admin: 'Administrador'
       },
       inputValue: user.role,

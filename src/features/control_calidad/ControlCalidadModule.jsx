@@ -94,7 +94,7 @@ export default function ControlCalidadModule() {
       }
 
       if (isSupervisor && data.current_supervisor_id && data.current_supervisor_id !== user.id) {
-        Swal.fire({ icon: 'warning', title: 'No tiene acceso', text: 'Esta prenda pertenece a otra supervisora', timer: 2000, showConfirmButton: false });
+        Swal.fire({ icon: 'warning', title: 'No tiene acceso', text: 'Esta prenda pertenece a otro supervisor', timer: 2000, showConfirmButton: false });
         return;
       }
 
@@ -326,7 +326,7 @@ export default function ControlCalidadModule() {
           action: 'Control de Calidad — Aprobada',
           from_status: previousStatus,
           to_status: 'Aprobada',
-          observation: 'Prenda correcta, aprobada por supervisora. Lista para pasar a otra área.',
+          observation: 'Prenda correcta, aprobada por supervisor. Lista para pasar a otra área.',
         })
         .select();
 
@@ -386,7 +386,7 @@ export default function ControlCalidadModule() {
         </div>
         <p class="text-muted mb-0">
           <i class="bi bi-info-circle me-1"></i>
-          La prenda quedará como <strong>pendiente de recepción</strong> en el área seleccionada y su supervisora deberá recepcionarla y reasignarla.
+          La prenda quedará como <strong>pendiente de recepción</strong> en el área seleccionada y su supervisor deberá recepcionarla y reasignarla.
         </p>
       `,
       showCancelButton: true,

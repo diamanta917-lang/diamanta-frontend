@@ -147,7 +147,7 @@ export const MainLayout = () => {
             </button>
             <span className="badge bg-primary fs-7 px-2 px-lg-3 py-2">
               <i className={`bi ${profile?.role === 'admin' ? 'bi-shield-check' : profile?.role === 'supervisora_principal' ? 'bi-star-fill' : 'bi-person-check'} me-1`}></i>
-              <span className="d-none d-sm-inline">{profile?.role === 'admin' ? 'Administrador' : profile?.role === 'supervisora_principal' ? 'Supervisora Principal' : 'Supervisora'}</span>
+              <span className="d-none d-sm-inline">{profile?.role === 'admin' ? 'Administrador' : profile?.role === 'supervisora_principal' ? 'Supervisor Principal' : 'Supervisor'}</span>
               <span className="d-sm-none">{profile?.role === 'admin' ? 'Admin' : profile?.role === 'supervisora_principal' ? 'S.P.' : 'Sup.'}</span>
             </span>
             <small className="text-muted d-none d-xl-inline">
