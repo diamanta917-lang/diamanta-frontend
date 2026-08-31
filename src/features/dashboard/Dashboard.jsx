@@ -101,17 +101,6 @@ export default function Dashboard() {
           <>
             <div className="col-md-4">
               <button
-                className="btn btn-primary btn-lg w-100 shadow-lg border-0"
-                style={{ minHeight: '130px', borderRadius: '16px' }}
-                onClick={() => navigate('/control-calidad')}
-              >
-                <i className="bi bi-clipboard-check" style={{ fontSize: '2.5rem' }}></i>
-                <h5 className="fw-bold mt-2 mb-0">CONTROL DE CALIDAD</h5>
-                <small className="opacity-75">Revisar, aprobar o rechazar</small>
-              </button>
-            </div>
-            <div className="col-md-4">
-              <button
                 className="btn btn-info btn-lg w-100 shadow-lg border-0"
                 style={{ minHeight: '130px', borderRadius: '16px' }}
                 onClick={() => navigate('/asignar')}
@@ -119,6 +108,28 @@ export default function Dashboard() {
                 <i className="bi bi-person-plus" style={{ fontSize: '2.5rem' }}></i>
                 <h5 className="fw-bold mt-2 mb-0">ASIGNAR</h5>
                 <small className="opacity-75">Asignar prendas a operarias</small>
+              </button>
+            </div>
+            <div className="col-md-4">
+              <button
+                className="btn btn-outline-info btn-lg w-100 shadow-lg border-0"
+                style={{ minHeight: '130px', borderRadius: '16px' }}
+                onClick={() => navigate('/recepcion-area')}
+              >
+                <i className="bi bi-inbox-fill" style={{ fontSize: '2.5rem' }}></i>
+                <h5 className="fw-bold mt-2 mb-0">RECEPCIÓN</h5>
+                <small className="opacity-75">Recepcionar prendas de otras áreas</small>
+              </button>
+            </div>
+            <div className="col-md-4">
+              <button
+                className="btn btn-primary btn-lg w-100 shadow-lg border-0"
+                style={{ minHeight: '130px', borderRadius: '16px' }}
+                onClick={() => navigate('/control-calidad')}
+              >
+                <i className="bi bi-clipboard-check" style={{ fontSize: '2.5rem' }}></i>
+                <h5 className="fw-bold mt-2 mb-0">CONTROL DE CALIDAD</h5>
+                <small className="opacity-75">Revisar, aprobar o rechazar</small>
               </button>
             </div>
             <div className="col-md-4">
@@ -172,20 +183,6 @@ export default function Dashboard() {
             <small className="opacity-75">Historial completo de prendas</small>
           </button>
         </div>
-
-        {(isSupervisor || isAdmin) && (
-          <div className="col-md-4">
-            <button
-              className="btn btn-outline-info btn-lg w-100 shadow-lg border-0"
-              style={{ minHeight: '130px', borderRadius: '16px' }}
-              onClick={() => navigate('/recepcion-area')}
-            >
-              <i className="bi bi-inbox-fill" style={{ fontSize: '2.5rem' }}></i>
-              <h5 className="fw-bold mt-2 mb-0">RECEPCIÓN</h5>
-              <small className="opacity-75">Recepcionar prendas de otras áreas</small>
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Stats Cards */}

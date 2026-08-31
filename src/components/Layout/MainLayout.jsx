@@ -44,9 +44,9 @@ export const MainLayout = () => {
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: 'bi-speedometer2', show: true },
     { path: '/asignar', label: 'Asignar', icon: 'bi-person-plus', show: isSupervisor || isAdmin },
+    { path: '/recepcion-area', label: 'Recepción', icon: 'bi-inbox-fill', show: isSupervisor || isAdmin },
     { path: '/control-calidad', label: 'Control Calidad', icon: 'bi-clipboard-check', show: true },
     { path: '/pasar-area', label: 'Pasar a Área', icon: 'bi-arrow-left-right', show: isSupervisor || isAdmin },
-    { path: '/recepcion-area', label: 'Recepción', icon: 'bi-inbox-fill', show: isSupervisor || isAdmin },
     { path: '/revision-principal', label: 'Revisión Final', icon: 'bi-star-check', show: isSupervisorPrincipal || isAdmin },
     { path: '/prendas', label: 'Prendas', icon: 'bi-boxes', show: true },
     { path: '/search', label: 'Búsqueda', icon: 'bi-search', show: true },
