@@ -47,6 +47,20 @@ export const garmentsService = {
     return data;
   },
 
+  async getByBarcodeOrReference(code) {
+    const { data, error } = await supabase
+      .from('garments')
+      .select(`
+        *,
+        operarias ( id, full_name, areas ( id, name ) )
+      `)
+      .or(`barcode.eq.${code},reference.eq.${code}`)
+      .order('updated_at', { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  },
+
   async getById(id) {
     const { data, error } = await supabase
       .from('garments')

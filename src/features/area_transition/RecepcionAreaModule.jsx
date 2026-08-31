@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { garmentsService } from '../../services/garments';
+import { useBarcodeScanner } from '../../hooks/useBarcodeScanner';
 import { StatusBadge } from '../../components/UI/StatusBadge';
 import { LoadingSpinner } from '../../components/UI/LoadingSpinner';
 import { PageHeader } from '../../components/UI/PageHeader';
@@ -11,6 +12,8 @@ export const RecepcionAreaModule = () => {
   const [qcGarments, setQcGarments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [lastScanned, setLastScanned] = useState(null);
   const { user, areaId, isSupervisor } = useAuth();
 
   const loadData = useCallback(async () => {
@@ -28,13 +31,13 @@ export const RecepcionAreaModule = () => {
     }
   }, [user, areaId, isSupervisor]);
 
-  const refresh = () => {
+  const refresh = useCallback(() => {
     setRefreshing(true);
     loadData().then(({ pending, qc }) => {
       setPendingGarments(pending);
       setQcGarments(qc);
     });
-  };
+  }, [loadData]);
 
   useEffect(() => {
     loadData().then(({ pending, qc }) => {
@@ -43,7 +46,7 @@ export const RecepcionAreaModule = () => {
     });
   }, [loadData]);
 
-  const handleReception = async (g) => {
+  const handleReception = useCallback(async (g) => {
     const result = await Swal.fire({
       title: 'Recepcionar Prenda',
       html: `
@@ -78,7 +81,7 @@ export const RecepcionAreaModule = () => {
       Swal.fire({ icon: 'error', title: 'Error', text: err.message });
     }
     setLoading(false);
-  };
+  }, [user, refresh]);
 
   const handleReceptionAll = async () => {
     if (pendingGarments.length === 0) return;
@@ -114,6 +117,59 @@ export const RecepcionAreaModule = () => {
     setLoading(false);
   };
 
+  const handleScan = useCallback(async (code) => {
+    const cleanCode = (code || '').trim();
+    if (!cleanCode) return;
+    setSearching(true);
+    try {
+      const matches = await garmentsService.getByBarcodeOrReference(cleanCode);
+      const garment = matches.find(g => g.status === 'Pendiente Recepcion' && g.current_area_id === areaId)
+        || matches[0];
+
+      if (!garment) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Prenda No Encontrada',
+          text: `El código ${cleanCode} no existe en el sistema`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setLastScanned(null);
+        return;
+      }
+
+      if (garment.status !== 'Pendiente Recepcion' || garment.current_area_id !== areaId) {
+        Swal.fire({
+          icon: 'info',
+          title: 'No pendiente de recepción',
+          text: `La prenda ${cleanCode} no está pendiente de recepción en esta área`,
+          timer: 2500,
+          showConfirmButton: false,
+        });
+        setLastScanned(garment);
+        return;
+      }
+
+      setLastScanned(garment);
+      await handleReception(garment);
+    } catch (err) {
+      Swal.fire({ icon: 'error', title: 'Error', text: err.message });
+    } finally {
+      setSearching(false);
+    }
+  }, [areaId, handleReception]);
+
+  useBarcodeScanner(handleScan);
+
+  const handleManualSearch = (e) => {
+    e.preventDefault();
+    const code = e.target.elements.manualCode?.value?.trim();
+    if (code) {
+      handleScan(code);
+      e.target.reset();
+    }
+  };
+
   const getReturnObservation = (g) => {
     const last = (g.movements || [])[0];
     if (!last || !/devuelta|devoluci/i.test(last.action || '')) return null;
@@ -141,6 +197,47 @@ export const RecepcionAreaModule = () => {
           </div>
         }
       />
+
+      <div className="card shadow-sm mb-3">
+        <div className="card-body">
+          <div className="d-flex align-items-center gap-3">
+            {searching ? (
+              <div className="d-flex align-items-center text-primary">
+                <div className="spinner-border spinner-border-sm me-2" role="status">
+                  <span className="visually-hidden">Buscando...</span>
+                </div>
+                <span>Buscando prenda...</span>
+              </div>
+            ) : (
+              <i className="bi bi-upc-scan text-primary fs-1"></i>
+            )}
+            <div className="flex-grow-1">
+              <form onSubmit={handleManualSearch} className="d-flex gap-2">
+                <input
+                  type="text"
+                  name="manualCode"
+                  className="form-control"
+                  placeholder="Escanee o escriba el código de barra de la prenda..."
+                  disabled={searching}
+                  autoFocus
+                />
+                <button type="submit" className="btn btn-primary" disabled={searching}>
+                  <i className="bi bi-search me-1"></i>Buscar
+                </button>
+              </form>
+              <small className="text-muted d-block mt-1">
+                El lector de código de barras funciona automáticamente. También puede escribir el código manualmente.
+              </small>
+              {lastScanned && (
+                <div className="alert alert-success py-1 px-3 mt-2 mb-0 d-inline-block">
+                  <i className="bi bi-check-circle me-2"></i>
+                  <strong>{lastScanned.barcode}</strong> — {lastScanned.product_name || 'N/A'}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="card shadow-sm">
         <div className="card-header bg-white">
