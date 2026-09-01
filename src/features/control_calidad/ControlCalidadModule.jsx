@@ -586,11 +586,19 @@ export default function ControlCalidadModule() {
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className={`card shadow-sm ${isReReview ? 'border-warning' : 'border-primary'}`}>
-              <div className={`card-header text-white ${isReReview ? 'bg-warning text-dark' : 'bg-primary'}`}>
+              <div className={`card-header text-white d-flex justify-content-between align-items-center ${isReReview ? 'bg-warning text-dark' : 'bg-primary'}`}>
                 <h4 className="mb-0">
                   <i className={`bi ${isReReview ? 'bi-arrow-repeat' : 'bi-search'} me-2`}></i>
                   {isReReview ? 'Revisión de Correcciones' : 'Inspección de Calidad'}
                 </h4>
+                <button
+                  className={`btn btn-sm ${isReReview ? 'btn-dark' : 'btn-light'}`}
+                  onClick={clearState}
+                  disabled={loading}
+                >
+                  <i className="bi bi-arrow-left me-1"></i>
+                  Volver a escanear
+                </button>
               </div>
               <div className="card-body">
                 <div className="row mb-4">
