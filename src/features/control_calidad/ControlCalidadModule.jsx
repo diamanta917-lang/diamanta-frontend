@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../services/supabase';
 import { useAuth } from '../../context/useAuth';
 import { areasService } from '../../services/areas';
+import { operariasService } from '../../services/operarias';
 import { useBarcodeScanner } from '../../hooks/useBarcodeScanner';
 import { StatusBadge } from '../../components/UI/StatusBadge';
 import { STATUSES } from '../../constants';
@@ -16,6 +17,7 @@ export default function ControlCalidadModule() {
   const [stats, setStats] = useState({ recibidas: [], devueltas: [], totalRecibidas: 0, totalDevueltas: 0 });
   const [statsLoading, setStatsLoading] = useState(false);
   const [areas, setAreas] = useState([]);
+  const [supervisorOperarias, setSupervisorOperarias] = useState([]);
   const [receptionQueue, setReceptionQueue] = useState([]);
   const [lastScanned, setLastScanned] = useState(null);
   const { user, isSupervisor, areaId } = useAuth();
@@ -77,7 +79,12 @@ export default function ControlCalidadModule() {
 
   useEffect(() => {
     areasService.getAll(true).then(data => setAreas(data || [])).catch(() => setAreas([]));
-  }, []);
+    if (isSupervisor && user?.id) {
+      operariasService.getBySupervisor(user.id, true)
+        .then(data => setSupervisorOperarias(data || []))
+        .catch(() => setSupervisorOperarias([]));
+    }
+  }, [isSupervisor, user?.id]);
 
   const handleScan = useCallback(async (scannedCode) => {
     setScanning(true);
@@ -366,6 +373,15 @@ export default function ControlCalidadModule() {
           <p class="mb-1"><strong>Operaria:</strong> ${garment.operarias?.full_name || 'Sin asignar'}</p>
           <p class="mb-0"><strong>Área actual:</strong> ${areaActualNombre}</p>
         </div>
+        ${isSupervisor ? `
+        <div class="mb-3">
+          <label class="form-label fw-bold">Operaria de destino</label>
+          <select id="swal-dest-operaria" class="form-select">
+            <option value="">Seleccione la operaria...</option>
+            ${supervisorOperarias.map(o => `<option value="${o.id}">${o.full_name}${o.id === garment.operaria_id ? ' (operaria actual)' : ''}</option>`).join('')}
+          </select>
+        </div>
+        ` : `
         <div class="mb-3">
           <label class="form-label fw-bold">Área de destino</label>
           <select id="swal-dest-area" class="form-select">
@@ -373,6 +389,7 @@ export default function ControlCalidadModule() {
             ${areas.map(a => `<option value="${a.id}">${a.name}${a.id === (garment.operarias?.areas?.id || garment.current_area_id) ? ' (área actual)' : ''}</option>`).join('')}
           </select>
         </div>
+        `}
         <div class="mb-3">
           <label class="form-label fw-bold">Motivo de Devolución</label>
           <select id="swal-reason" class="form-select">
@@ -386,7 +403,9 @@ export default function ControlCalidadModule() {
         </div>
         <p class="text-muted mb-0">
           <i class="bi bi-info-circle me-1"></i>
-          La prenda quedará como <strong>pendiente de recepción</strong> en el área seleccionada y su supervisor deberá recepcionarla y reasignarla.
+          ${isSupervisor
+            ? 'La prenda quedará como <strong>Requiere corrección</strong> asignada a la operaria seleccionada de su área.'
+            : 'La prenda quedará como <strong>pendiente de recepción</strong> en el área seleccionada y su supervisor deberá recepcionarla y reasignarla.'}
         </p>
       `,
       showCancelButton: true,
@@ -394,9 +413,15 @@ export default function ControlCalidadModule() {
       cancelButtonText: 'Cancelar',
       confirmButtonColor: '#dc3545',
       preConfirm: () => {
-        const destAreaId = document.getElementById('swal-dest-area').value;
         const reasonId = document.getElementById('swal-reason').value;
         const observation = document.getElementById('swal-observation').value.trim();
+        if (isSupervisor) {
+          const operariaId = document.getElementById('swal-dest-operaria').value;
+          if (!operariaId) { Swal.showValidationMessage('Debe seleccionar una operaria de su área'); return false; }
+          if (!reasonId) { Swal.showValidationMessage('Debe seleccionar un motivo de devolución'); return false; }
+          return { operariaId, reasonId, observation };
+        }
+        const destAreaId = document.getElementById('swal-dest-area').value;
         if (!destAreaId) { Swal.showValidationMessage('Debe seleccionar un área de destino'); return false; }
         if (!reasonId) { Swal.showValidationMessage('Debe seleccionar un motivo de devolución'); return false; }
         return { destAreaId, reasonId, observation };
@@ -409,41 +434,81 @@ export default function ControlCalidadModule() {
     try {
       const previousStatus = garment.status;
       const reason = reasons.find(r => r.id === formValues.reasonId);
-      const destArea = areas.find(a => a.id === formValues.destAreaId);
 
-      await supabase.rpc('return_garment_from_review', {
-        p_garment_id: garment.id,
-        p_supervisor_principal_id: user.id,
-        p_dest_area_id: formValues.destAreaId,
-        p_observation: formValues.observation || `Motivo: ${reason?.name || ''}`,
-      });
+      if (isSupervisor) {
+        const operaria = supervisorOperarias.find(o => o.id === formValues.operariaId);
 
-      await Swal.fire({
-        icon: 'warning',
-        title: 'Prenda Devuelta al Área',
-        html: `
-          <p><strong>${garment.barcode}</strong></p>
-          <p>Devuelta a: <strong>${destArea?.name || 'área seleccionada'}</strong></p>
-          <p>Motivo: <strong>${reason?.name || ''}</strong></p>
-        `,
-        timer: 3000,
-        showConfirmButton: false,
-      });
+        await supabase.rpc('reassign_garment_operaria', {
+          p_garment_id: garment.id,
+          p_new_operaria_id: formValues.operariaId,
+          p_return_reason_id: formValues.reasonId,
+          p_observation: formValues.observation || `Motivo: ${reason?.name || ''}`,
+        });
 
-      setGarment(prev => ({
-        ...prev,
-        status: STATUSES.PENDIENTE_RECEPCION,
-        current_location: `Pendiente Recepción - ${destArea?.name || ''}`,
-        current_area_id: formValues.destAreaId,
-        return_count: (prev.return_count || 0) + 1,
-      }));
-      setResult({
-        type: 'requiere_correccion',
-        previousStatus,
-        garmentId: garment.id,
-        returnCount: garment.return_count || 0,
-        areaName: destArea?.name || '',
-      });
+        await Swal.fire({
+          icon: 'warning',
+          title: 'Prenda Devuelta a Operaria',
+          html: `
+            <p><strong>${garment.barcode}</strong></p>
+            <p>Devuelta a: <strong>${operaria?.full_name || 'operaria seleccionada'}</strong></p>
+            <p>Motivo: <strong>${reason?.name || ''}</strong></p>
+          `,
+          timer: 3000,
+          showConfirmButton: false,
+        });
+
+        setGarment(prev => ({
+          ...prev,
+          status: STATUSES.REQUIERE_CORRECCION,
+          current_location: `Requiere corrección - ${operaria?.full_name || ''}`,
+          operaria_id: formValues.operariaId,
+          return_count: (prev.return_count || 0) + 1,
+        }));
+        setResult({
+          type: 'requiere_correccion',
+          previousStatus,
+          garmentId: garment.id,
+          returnCount: garment.return_count || 0,
+          areaName: operaria?.full_name || '',
+          operariaId: garment.operaria_id || null,
+        });
+      } else {
+        const destArea = areas.find(a => a.id === formValues.destAreaId);
+
+        await supabase.rpc('return_garment_from_review', {
+          p_garment_id: garment.id,
+          p_supervisor_principal_id: user.id,
+          p_dest_area_id: formValues.destAreaId,
+          p_observation: formValues.observation || `Motivo: ${reason?.name || ''}`,
+        });
+
+        await Swal.fire({
+          icon: 'warning',
+          title: 'Prenda Devuelta al Área',
+          html: `
+            <p><strong>${garment.barcode}</strong></p>
+            <p>Devuelta a: <strong>${destArea?.name || 'área seleccionada'}</strong></p>
+            <p>Motivo: <strong>${reason?.name || ''}</strong></p>
+          `,
+          timer: 3000,
+          showConfirmButton: false,
+        });
+
+        setGarment(prev => ({
+          ...prev,
+          status: STATUSES.PENDIENTE_RECEPCION,
+          current_location: `Pendiente Recepción - ${destArea?.name || ''}`,
+          current_area_id: formValues.destAreaId,
+          return_count: (prev.return_count || 0) + 1,
+        }));
+        setResult({
+          type: 'requiere_correccion',
+          previousStatus,
+          garmentId: garment.id,
+          returnCount: garment.return_count || 0,
+          areaName: destArea?.name || '',
+        });
+      }
     } catch (err) {
       Swal.fire({ icon: 'error', title: 'Error', text: err.message?.replace(/^ERROR:\s*/, '') || 'No se pudo devolver la prenda' });
     }
@@ -460,6 +525,9 @@ export default function ControlCalidadModule() {
       };
       if (result.returnCount !== undefined) {
         updates.return_count = result.returnCount;
+      }
+      if (result.operariaId !== undefined) {
+        updates.operaria_id = result.operariaId;
       }
 
       const { error } = await supabase.from('garments').update(updates).eq('id', garment.id);
